@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>to-do-list</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="main-cont">
+      <div class="add-project-form-cont" id="add-project-form-cont">
+        <div class="add-project-form-cont__exit">
+          <button
+            class="add-project-form-cont__exit__exit-button"
+            id="form-exit-button"
+          >
+            X
+          </button>
+        </div>
+        <form class="add-project-form-cont__form">
+          <input
+            type="text"
+            class="project-title"
+            id="project-title"
+            placeholder="project title"
+            required
+          />
+          <button class="submit-project-button" id="submit-project-button">
+            Submit the project
+          </button>
+        </form>
+      </div>
+      <header class="header"></header>
+      <main class="main">
+        <div class="menu">
+          <div class="menu__default-options">
+            <button
+              class="option menu__default-options__inbox"
+              id="inbox-button"
+            >
+              Inbox
+            </button>
+            <button
+              class="option menu__default-options__today"
+              id="today-button"
+            >
+              Today
+            </button>
+            <button
+              class="option menu__default-options__this-week"
+              id="this-week-button"
+            >
+              This week
+            </button>
+          </div>
+          <div class="menu__user-options">
+            <button
+              class="menu__user-options__add-project"
+              id="add-project-button"
+            >
+              Add new project
+            </button>
+          </div>
+        </div>
+        <div class="display" id="display"></div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
