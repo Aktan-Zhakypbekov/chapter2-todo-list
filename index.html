@@ -9,63 +9,51 @@
   </head>
   <body>
     <div class="main-cont">
-      <div class="add-project-form-cont" id="add-project-form-cont">
-        <div class="add-project-form-cont__exit">
-          <button
-            class="add-project-form-cont__exit__exit-button"
-            id="form-exit-button"
-          >
+      <div class="add-project-form-cont">
+        <div class="add-project-form-cont__exit-cont">
+          <button class="add-project-form-cont__exit-cont__exit-button">
             X
           </button>
         </div>
         <form class="add-project-form-cont__form">
           <input
             type="text"
-            class="project-title"
-            id="project-title"
+            class="add-project-form-cont__form__project-title"
             placeholder="project title"
             required
           />
-          <button class="submit-project-button" id="submit-project-button">
+          <button class="add-project-form-cont__form__submit-button">
             Submit the project
           </button>
         </form>
       </div>
-      <header class="header"></header>
+      <div class="add-to-do-form-cont">
+        <div class="add-to-do-form-cont__exit-cont">
+          <button class="add-to-do-form-cont__exit-cont__exit-button">X</button>
+        </div>
+        <form class="add-to-do-form-cont__form">
+          <input
+            type="text"
+            class="add-to-do-form-cont__form__to-do-title"
+            placeholder="title"
+            required
+          />
+          <button class="add-to-do-form-cont__form__submit-button">
+            Submit to-do
+          </button>
+        </form>
+      </div>
+      <header class="header">Header</header>
       <main class="main">
         <div class="menu">
-          <div class="menu__default-projects">
-            <button
-              class="project menu__default-projects__inbox-button"
-              id="inbox-button"
-            >
-              Inbox
-            </button>
-            <button
-              class="project menu__default-projects__today-button"
-              id="today-button"
-            >
-              Today
-            </button>
-            <button
-              class="project menu__default-projects__this-week-button"
-              id="this-week-button"
-            >
-              This week
-            </button>
-          </div>
-          <div class="menu__user-projects">
-            <button
-              class="menu__user-projects__add-project-button"
-              id="add-project-button"
-            >
-              Add new project
-            </button>
-          </div>
+          <button class="menu__add-project-button">+ Add project</button>
         </div>
-        <div class="display" id="display"></div>
+        <div class="display"></div>
       </main>
-      <footer class="footer"></footer>
+      <footer class="footer">
+        footer
+        <button class="test-button">test</button>
+      </footer>
     </div>
     <script src="index.js"></script>
   </body>
