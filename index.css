@@ -33,8 +33,8 @@
 }
 .add-to-do-form-cont {
   background-color: purple;
-  height: 200px;
-  width: 300px;
+  height: 300px;
+  width: 400px;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -50,6 +50,10 @@
 }
 .add-to-do-form-cont__exit-cont__exit-button {
   margin: 0.5rem;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  color: rgb(47, 0, 255);
 }
 .add-to-do-form-cont__form {
   flex-grow: 1;
@@ -59,7 +63,26 @@
   justify-content: space-evenly;
   align-items: center;
 }
-
+.add-to-do-form-cont__form__to-do-title {
+  width: 270px;
+  height: 30px;
+  background-color: black;
+  color: rgb(47, 0, 255);
+  font-size: 1rem;
+  border: none;
+  border: 1px solid rgb(47, 0, 255);
+}
+.add-to-do-form-cont__form__to-do-date {
+  width: 150px;
+  height: 30px;
+  background-color: black;
+  color: rgb(47, 0, 255);
+  font-size: 1rem;
+  border: none;
+  border: 1px solid rgb(47, 0, 255);
+}
+.add-to-do-form-cont__form__submit-button {
+}
 .header {
   height: 100px;
   background-color: black;

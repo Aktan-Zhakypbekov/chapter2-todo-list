@@ -57,17 +57,17 @@ function displayMenuProjects() {
     let projectEnter = document.createElement("button");
     projectEnter.className = "project-enter-button";
     projectEnter.style.cssText =
-      "width: 100px; background-color: black; color: rgb(47, 0, 255);";
+      "width: 60%; background-color: black; color: rgb(47, 0, 255);";
     projectEnter.textContent = item.title;
     let projectEdit = document.createElement("button");
     projectEdit.className = "project-edit-button";
     projectEdit.style.cssText =
-      "flex-grow: 1; background-color: black; color: rgb(47, 0, 255);";
+      "width: 20%; background-color: black; color: rgb(47, 0, 255);";
     projectEdit.textContent = "Edit";
     let projectDelete = document.createElement("button");
     projectDelete.className = "project-edit-button";
     projectDelete.style.cssText =
-      "flex-grow: 1; background-color: black; color: rgb(47, 0, 255);";
+      "width: 20%; background-color: black; color: rgb(47, 0, 255);";
     projectDelete.textContent = "Delete";
 
     projectEnter.addEventListener("click", (e) => {
@@ -90,12 +90,12 @@ function displayProjectInterface(title) {
   let projectInterface = document.createElement("div");
   projectInterface.className = "project-interface";
   projectInterface.style.cssText =
-    "width: 100%; height: 100%; color:rgb(47, 0, 255); background-color: lightgreen; display: flex; flex-direction: column; align-items: center;";
+    "width: 100%; height: 100%; color:rgb(47, 0, 255); background-color: black; display: flex; flex-direction: column; align-items: center;";
 
   let projectInterfaceHeader = document.createElement("div");
   projectInterfaceHeader.className = "project-interface-header";
   projectInterfaceHeader.style.cssText =
-    "width: 100%; height: 35px; background-color: black; color: rgb(47, 0, 255); display: flex;";
+    "width: 100%; height: 35px; background-color: black; color: rgb(47, 0, 255); display: flex; border-bottom: 1px solid rgb(47, 0, 255);";
 
   let projectInterfaceHeaderTitleCont = document.createElement("div");
   projectInterfaceHeaderTitleCont.className =
@@ -178,10 +178,44 @@ function addToDoToProjectsArrayMenuProjects() {
 
 function displayToDoInProject(item1) {
   item1.todoList.forEach((toDo) => {
-    let toDoItem = document.createElement("button");
+    let toDoItem = document.createElement("div");
     toDoItem.className = "to-do-item";
-    toDoItem.style.cssText = "background-color: black; color: rgb(47, 0, 255);";
-    toDoItem.textContent = toDo.title;
+    toDoItem.style.cssText =
+      "background-color: black; color: rgb(47, 0, 255); width: 100%; height: 30px; border-bottom: 1px solid rgb(47, 0, 255); display: flex;";
+
+    let toDoItemTitle = document.createElement("div");
+    toDoItemTitle.className = "to-do-item-title";
+    toDoItemTitle.style.cssText =
+      "width: 50%; display: flex; justify-content: center; align-items: center;";
+    let toDoItemTitleText = document.createElement("div");
+    toDoItemTitleText.textContent = toDo.title;
+    toDoItemTitle.appendChild(toDoItemTitleText);
+
+    let toDoItemDate = document.createElement("div");
+    toDoItemDate.className = "to-do-item-date;";
+    toDoItemDate.style.cssText =
+      "width: 30%; display: flex; justify-content: center; align-items: center;";
+    let toDoItemDateText = document.createElement("div");
+    toDoItemDateText.textContent = "10/20/2021";
+    toDoItemDate.appendChild(toDoItemDateText);
+
+    let toDoItemEdit = document.createElement("button");
+    toDoItemEdit.className = "to-do-item-edit";
+    toDoItemEdit.style.cssText =
+      "width: 10%; color: rgb(47, 0, 255); background-color: black;";
+    toDoItemEdit.textContent = "Edit";
+
+    let toDoItemDelete = document.createElement("button");
+    toDoItemDelete.className = "to-do-item-delete";
+    toDoItemDelete.style.cssText =
+      "width: 10%; color: rgb(47, 0, 255); background-color: black;";
+    toDoItemDelete.textContent = "Delete";
+
+    toDoItem.appendChild(toDoItemTitle);
+    toDoItem.appendChild(toDoItemDate);
+    toDoItem.appendChild(toDoItemEdit);
+    toDoItem.appendChild(toDoItemDelete);
+
     document.querySelector(".project-interface").appendChild(toDoItem);
   });
 }
