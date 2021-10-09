@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 .add-project-form-cont {
-  background-color: darkgoldenrod;
+  background-color: black;
+  border: 2px solid rgb(47, 0, 255);
   height: 200px;
   width: 300px;
   position: fixed;
@@ -16,23 +17,50 @@
   display: none;
 }
 .add-project-form-cont__exit-cont {
-  background-color: darkgreen;
+  background-color: black;
+  border-bottom: 1px solid rgb(47, 0, 255);
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
+  align-items: center;
+}
+.add-project-form-cont__exit-cont__title {
+  margin-left: 32%;
+  color: rgb(47, 0, 255);
+  font-size: 1.3rem;
 }
 .add-project-form-cont__exit-cont__exit-button {
   margin: 0.5rem;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  color: rgb(47, 0, 255);
 }
 .add-project-form-cont__form {
   flex-grow: 1;
-  background-color: darkblue;
+  background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
+.add-project-form-cont__form__project-title {
+  width: 230px;
+  height: 30px;
+  background-color: black;
+  color: rgb(47, 0, 255);
+  font-size: 1rem;
+  border: none;
+  border: 1px solid rgb(47, 0, 255);
+}
+.add-project-form-cont__form__submit-button {
+  width: 100px;
+  background-color: black;
+  color: rgb(47, 0, 255);
+}
+
 .add-to-do-form-cont {
-  background-color: purple;
+  background-color: black;
+  border: 2px solid rgb(47, 0, 255);
   height: 300px;
   width: 400px;
   position: fixed;
@@ -44,10 +72,18 @@
   display: none;
 }
 .add-to-do-form-cont__exit-cont {
-  background-color: yellow;
+  background-color: black;
+  border-bottom: 1px solid rgb(47, 0, 255);
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
+  align-items: center;
 }
+.add-to-do-form-cont__exit-cont__title {
+  margin-left: 38%;
+  color: rgb(47, 0, 255);
+  font-size: 1.3rem;
+}
+
 .add-to-do-form-cont__exit-cont__exit-button {
   margin: 0.5rem;
   width: 30px;
@@ -57,7 +93,7 @@
 }
 .add-to-do-form-cont__form {
   flex-grow: 1;
-  background-color: lightgreen;
+  background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -82,6 +118,10 @@
   border: 1px solid rgb(47, 0, 255);
 }
 .add-to-do-form-cont__form__submit-button {
+  width: 100px;
+  height: 30px;
+  background-color: black;
+  color: rgb(47, 0, 255);
 }
 .header {
   height: 100px;

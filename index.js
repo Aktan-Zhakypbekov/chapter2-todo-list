@@ -1,6 +1,13 @@
-displayMenuProjects();
+let projectsArray;
 
-let projectsArray = JSON.parse(localStorage.getItem("projects"));
+if (JSON.parse(localStorage.getItem("projects"))) {
+  projectsArray = JSON.parse(localStorage.getItem("projects"));
+} else {
+  localStorage.setItem("projects", JSON.stringify([]));
+  projectsArray = JSON.parse(localStorage.getItem("projects"));
+}
+
+displayMenuProjects();
 
 let addProjectFormContainer = document.querySelector(".add-project-form-cont");
 let menuAddProjectButton = document.querySelector(".menu__add-project-button");
@@ -54,16 +61,19 @@ function displayMenuProjects() {
     project.className = "project";
     project.style.cssText =
       "display: flex; color: rgb(47, 0, 255); background-color: black; width: 220px; height: 35px; margin: 0.5rem; border: 1px solid rgb(47, 0, 255);";
+
     let projectEnter = document.createElement("button");
     projectEnter.className = "project-enter-button";
     projectEnter.style.cssText =
       "width: 60%; background-color: black; color: rgb(47, 0, 255);";
     projectEnter.textContent = item.title;
+
     let projectEdit = document.createElement("button");
     projectEdit.className = "project-edit-button";
     projectEdit.style.cssText =
       "width: 20%; background-color: black; color: rgb(47, 0, 255);";
     projectEdit.textContent = "Edit";
+
     let projectDelete = document.createElement("button");
     projectDelete.className = "project-edit-button";
     projectDelete.style.cssText =
@@ -79,6 +89,13 @@ function displayMenuProjects() {
       displayToDoInProject(item);
       optionPressed = true;
     });
+
+    projectDelete.addEventListener("click", (e) => {
+      project.remove();
+      projectsArray.splice(projectsList.indexOf(item), 1);
+      localStorage.setItem("projects", JSON.stringify(projectsArray));
+    });
+
     project.appendChild(projectEnter);
     project.appendChild(projectEdit);
     project.appendChild(projectDelete);
@@ -155,12 +172,12 @@ function addToDoToProjectsArrayMenuProjects() {
     ".add-to-do-form-cont__form__to-do-title"
   ).value;
   let toDo = new CreateToDo(toDoTitle);
-  let projectInterfaceHeader = document.querySelector(
-    ".project-interface-header"
+  let projectInterfaceHeaderTitle = document.querySelector(
+    ".project-interface-header-title"
   );
   projectsArray[
     projectsArray.findIndex(
-      (x) => x.title == projectInterfaceHeader.textContent
+      (x) => x.title == projectInterfaceHeaderTitle.textContent
     )
   ].todoList.push(toDo);
   localStorage.setItem("projects", JSON.stringify(projectsArray));
@@ -170,7 +187,7 @@ function addToDoToProjectsArrayMenuProjects() {
   displayToDoInProject(
     projectsArray[
       projectsArray.findIndex(
-        (x) => x.title == projectInterfaceHeader.textContent
+        (x) => x.title == projectInterfaceHeaderTitle.textContent
       )
     ]
   );
@@ -210,6 +227,26 @@ function displayToDoInProject(item1) {
     toDoItemDelete.style.cssText =
       "width: 10%; color: rgb(47, 0, 255); background-color: black;";
     toDoItemDelete.textContent = "Delete";
+
+    toDoItemDelete.addEventListener("click", (e) => {
+      toDoItem.remove();
+      let projectInterfaceHeaderTitle = document.querySelector(
+        ".project-interface-header-title"
+      );
+      projectsArray[
+        projectsArray.findIndex(
+          (x) => x.title == projectInterfaceHeaderTitle.textContent
+        )
+      ].todoList.splice(
+        projectsArray[
+          projectsArray.findIndex(
+            (x) => x.title == projectInterfaceHeaderTitle.textContent
+          )
+        ].todoList.indexOf(toDo),
+        1
+      );
+      localStorage.setItem("projects", JSON.stringify(projectsArray));
+    });
 
     toDoItem.appendChild(toDoItemTitle);
     toDoItem.appendChild(toDoItemDate);
