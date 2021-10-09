@@ -1,5 +1,5 @@
 let projectsArray;
-
+let submitButtonChecker = false;
 if (JSON.parse(localStorage.getItem("projects"))) {
   projectsArray = JSON.parse(localStorage.getItem("projects"));
 } else {
@@ -8,6 +8,19 @@ if (JSON.parse(localStorage.getItem("projects"))) {
 }
 
 displayMenuProjects();
+
+let editProjectFormContainer = document.querySelector(
+  ".edit-project-form-cont"
+);
+let editProjectFormExitButton = document.querySelector(
+  ".edit-project-form-cont__exit-cont__exit-button"
+);
+editProjectFormExitButton.addEventListener("click", (e) => {
+  editProjectFormContainer.style.cssText = "display: none;";
+});
+let editProjectFormSubmitButton = document.querySelector(
+  ".edit-project-form-cont__form__submit-button"
+);
 
 let addProjectFormContainer = document.querySelector(".add-project-form-cont");
 let menuAddProjectButton = document.querySelector(".menu__add-project-button");
@@ -90,6 +103,26 @@ function displayMenuProjects() {
       optionPressed = true;
     });
 
+    projectEdit.addEventListener("click", (e) => {
+      editProjectFormContainer.style.cssText = "display: flex;";
+      document.querySelector(
+        ".edit-project-form-cont__form__project-title"
+      ).value = item.title;
+
+      editProjectFormSubmitButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        projectsArray[
+          projectsArray.findIndex((x) => x.title == item.title)
+        ].title = document.querySelector(
+          ".edit-project-form-cont__form__project-title"
+        ).value;
+        localStorage.setItem("projects", JSON.stringify(projectsArray));
+        projectEnter.textContent = document.querySelector(
+          ".edit-project-form-cont__form__project-title"
+        ).value;
+      });
+    });
+
     projectDelete.addEventListener("click", (e) => {
       project.remove();
       projectsArray.splice(projectsList.indexOf(item), 1);
@@ -144,6 +177,17 @@ function displayProjectInterface(title) {
   display.appendChild(projectInterface);
 }
 
+let editToDoFormContainer = document.querySelector(".edit-to-do-form-cont");
+let editToDoFormExitButton = document.querySelector(
+  ".edit-to-do-form-cont__exit-cont__exit-button"
+);
+editToDoFormExitButton.addEventListener("click", (e) => {
+  editToDoFormContainer.style.cssText = "display: none;";
+});
+let editToDoFormSubmitButton = document.querySelector(
+  ".edit-to-do-form-cont__form__submit-button"
+);
+
 let addToDoFormContainer = document.querySelector(".add-to-do-form-cont");
 let addToDoFormExitButton = document.querySelector(
   ".add-to-do-form-cont__exit-cont__exit-button"
@@ -151,7 +195,6 @@ let addToDoFormExitButton = document.querySelector(
 addToDoFormExitButton.addEventListener("click", (e) => {
   addToDoFormContainer.style.cssText = "display: none;";
 });
-
 let addToDoFormSubmitButton = document.querySelector(
   ".add-to-do-form-cont__form__submit-button"
 );
@@ -227,6 +270,29 @@ function displayToDoInProject(item1) {
     toDoItemDelete.style.cssText =
       "width: 10%; color: rgb(47, 0, 255); background-color: black;";
     toDoItemDelete.textContent = "Delete";
+
+    toDoItemEdit.addEventListener("click", (e) => {
+      editToDoFormContainer.style.cssText = "display: flex;";
+      document.querySelector(".edit-to-do-form-cont__form__to-do-title").value =
+        toDo.title;
+
+      editToDoFormSubmitButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        projectsArray[
+          projectsArray.findIndex((x) => x.title == item1.title)
+        ].todoList[
+          projectsArray[
+            projectsArray.findIndex((x) => x.title == item1.title)
+          ].todoList.findIndex((x) => x.title == toDo.title)
+        ].title = document.querySelector(
+          ".edit-to-do-form-cont__form__to-do-title"
+        ).value;
+        localStorage.setItem("projects", JSON.stringify(projectsArray));
+        toDoItemTitleText.textContent = document.querySelector(
+          ".edit-to-do-form-cont__form__to-do-title"
+        ).value;
+      });
+    });
 
     toDoItemDelete.addEventListener("click", (e) => {
       toDoItem.remove();
