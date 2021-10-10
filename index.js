@@ -1,40 +1,26 @@
 let projectsArray;
-let submitButtonChecker = false;
+
 if (JSON.parse(localStorage.getItem("projects"))) {
   projectsArray = JSON.parse(localStorage.getItem("projects"));
 } else {
   localStorage.setItem("projects", JSON.stringify([]));
   projectsArray = JSON.parse(localStorage.getItem("projects"));
+  alert("here");
 }
 
 displayMenuProjects();
-
-let editProjectFormContainer = document.querySelector(
-  ".edit-project-form-cont"
-);
-let editProjectFormExitButton = document.querySelector(
-  ".edit-project-form-cont__exit-cont__exit-button"
-);
-editProjectFormExitButton.addEventListener("click", (e) => {
-  editProjectFormContainer.style.cssText = "display: none;";
-});
-let editProjectFormSubmitButton = document.querySelector(
-  ".edit-project-form-cont__form__submit-button"
-);
 
 let addProjectFormContainer = document.querySelector(".add-project-form-cont");
 let menuAddProjectButton = document.querySelector(".menu__add-project-button");
 menuAddProjectButton.addEventListener("click", (e) => {
   addProjectFormContainer.style.cssText = "display: flex;";
 });
-
 let addProjectFormExitButton = document.querySelector(
   ".add-project-form-cont__exit-cont__exit-button"
 );
 addProjectFormExitButton.addEventListener("click", (e) => {
   addProjectFormContainer.style.cssText = "display: none;";
 });
-
 let addProjectFormSubmitButton = document.querySelector(
   ".add-project-form-cont__form__submit-button"
 );
@@ -42,6 +28,9 @@ addProjectFormSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
   addToProjectsArray();
   displayMenuProjects();
+  document.querySelector(".add-project-form-cont__form__project-title").value =
+    "";
+  addProjectFormContainer.style.cssText = "diplay: none;";
 });
 
 class CreateProject {
@@ -103,23 +92,31 @@ function displayMenuProjects() {
       optionPressed = true;
     });
 
-    projectEdit.addEventListener("click", (e) => {
+    projectEdit.addEventListener("click", (edit) => {
       editProjectFormContainer.style.cssText = "display: flex;";
+      let butt = edit.target.parentElement.firstChild.textContent;
       document.querySelector(
         ".edit-project-form-cont__form__project-title"
-      ).value = item.title;
+      ).value = butt;
+      //copyOfOld = createCopyOfOld(butt);
 
       editProjectFormSubmitButton.addEventListener("click", (e) => {
         e.preventDefault();
-        projectsArray[
-          projectsArray.findIndex((x) => x.title == item.title)
-        ].title = document.querySelector(
-          ".edit-project-form-cont__form__project-title"
-        ).value;
+        projectsArray[projectsArray.findIndex((x) => x.title == butt)].title =
+          document.querySelector(
+            ".edit-project-form-cont__form__project-title"
+          ).value;
         localStorage.setItem("projects", JSON.stringify(projectsArray));
-        projectEnter.textContent = document.querySelector(
-          ".edit-project-form-cont__form__project-title"
-        ).value;
+        projectEnter.textContent =
+          projectsArray[
+            projectsArray.findIndex(
+              (x) =>
+                x.title ==
+                document.querySelector(
+                  ".edit-project-form-cont__form__project-title"
+                ).value
+            )
+          ].title;
       });
     });
 
@@ -135,6 +132,19 @@ function displayMenuProjects() {
     document.querySelector(".menu").appendChild(project);
   });
 }
+
+let editProjectFormContainer = document.querySelector(
+  ".edit-project-form-cont"
+);
+let editProjectFormExitButton = document.querySelector(
+  ".edit-project-form-cont__exit-cont__exit-button"
+);
+editProjectFormExitButton.addEventListener("click", (e) => {
+  editProjectFormContainer.style.cssText = "display: none;";
+});
+let editProjectFormSubmitButton = document.querySelector(
+  ".edit-project-form-cont__form__submit-button"
+);
 
 function displayProjectInterface(title) {
   let projectInterface = document.createElement("div");
@@ -173,20 +183,8 @@ function displayProjectInterface(title) {
   projectInterfaceHeader.appendChild(projectInterfaceAddToDoButton);
 
   projectInterface.appendChild(projectInterfaceHeader);
-  let display = document.querySelector(".display");
-  display.appendChild(projectInterface);
+  document.querySelector(".display").appendChild(projectInterface);
 }
-
-let editToDoFormContainer = document.querySelector(".edit-to-do-form-cont");
-let editToDoFormExitButton = document.querySelector(
-  ".edit-to-do-form-cont__exit-cont__exit-button"
-);
-editToDoFormExitButton.addEventListener("click", (e) => {
-  editToDoFormContainer.style.cssText = "display: none;";
-});
-let editToDoFormSubmitButton = document.querySelector(
-  ".edit-to-do-form-cont__form__submit-button"
-);
 
 let addToDoFormContainer = document.querySelector(".add-to-do-form-cont");
 let addToDoFormExitButton = document.querySelector(
@@ -202,11 +200,15 @@ addToDoFormSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
   addToDoToProjectsArrayMenuProjects();
   displayMenuProjects();
+  document.querySelector(".add-to-do-form-cont__form__to-do-title").value = "";
+  document.querySelector(".add-to-do-form-cont__form__to-do-date").value = "";
+  addToDoFormContainer.style.cssText = "diplay: none;";
 });
 
 class CreateToDo {
-  constructor(title) {
+  constructor(title, date) {
     this.title = title;
+    this.date = date;
   }
 }
 
@@ -214,7 +216,10 @@ function addToDoToProjectsArrayMenuProjects() {
   let toDoTitle = document.querySelector(
     ".add-to-do-form-cont__form__to-do-title"
   ).value;
-  let toDo = new CreateToDo(toDoTitle);
+  let toDoDate = document.querySelector(
+    ".add-to-do-form-cont__form__to-do-date"
+  ).value;
+  let toDo = new CreateToDo(toDoTitle, toDoDate);
   let projectInterfaceHeaderTitle = document.querySelector(
     ".project-interface-header-title"
   );
@@ -256,7 +261,8 @@ function displayToDoInProject(item1) {
     toDoItemDate.style.cssText =
       "width: 30%; display: flex; justify-content: center; align-items: center;";
     let toDoItemDateText = document.createElement("div");
-    toDoItemDateText.textContent = "10/20/2021";
+    toDoItemDateText.textContent = toDo.date;
+    toDoItemDateText.style.cssText = "color: rgb(47, 0, 255);";
     toDoItemDate.appendChild(toDoItemDateText);
 
     let toDoItemEdit = document.createElement("button");
@@ -275,6 +281,8 @@ function displayToDoInProject(item1) {
       editToDoFormContainer.style.cssText = "display: flex;";
       document.querySelector(".edit-to-do-form-cont__form__to-do-title").value =
         toDo.title;
+      document.querySelector(".edit-to-do-form-cont__form__to-do-date").value =
+        toDo.date;
 
       editToDoFormSubmitButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -287,15 +295,27 @@ function displayToDoInProject(item1) {
         ].title = document.querySelector(
           ".edit-to-do-form-cont__form__to-do-title"
         ).value;
+        projectsArray[
+          projectsArray.findIndex((x) => x.title == item1.title)
+        ].todoList[
+          projectsArray[
+            projectsArray.findIndex((x) => x.title == item1.title)
+          ].todoList.findIndex((x) => x.date == toDo.date)
+        ].date = document.querySelector(
+          ".edit-to-do-form-cont__form__to-do-date"
+        ).value;
         localStorage.setItem("projects", JSON.stringify(projectsArray));
         toDoItemTitleText.textContent = document.querySelector(
           ".edit-to-do-form-cont__form__to-do-title"
+        ).value;
+        toDoItemDateText.textContent = document.querySelector(
+          ".edit-to-do-form-cont__form__to-do-date"
         ).value;
       });
     });
 
     toDoItemDelete.addEventListener("click", (e) => {
-      toDoItem.remove();
+      let butt1 = e.target.parentElement.firstChild.textContent;
       let projectInterfaceHeaderTitle = document.querySelector(
         ".project-interface-header-title"
       );
@@ -308,10 +328,12 @@ function displayToDoInProject(item1) {
           projectsArray.findIndex(
             (x) => x.title == projectInterfaceHeaderTitle.textContent
           )
-        ].todoList.indexOf(toDo),
+        ].todoList.findIndex((x) => x.title == butt1),
         1
       );
+
       localStorage.setItem("projects", JSON.stringify(projectsArray));
+      toDoItem.remove();
     });
 
     toDoItem.appendChild(toDoItemTitle);
@@ -322,3 +344,13 @@ function displayToDoInProject(item1) {
     document.querySelector(".project-interface").appendChild(toDoItem);
   });
 }
+let editToDoFormContainer = document.querySelector(".edit-to-do-form-cont");
+let editToDoFormExitButton = document.querySelector(
+  ".edit-to-do-form-cont__exit-cont__exit-button"
+);
+editToDoFormExitButton.addEventListener("click", (e) => {
+  editToDoFormContainer.style.cssText = "display: none;";
+});
+let editToDoFormSubmitButton = document.querySelector(
+  ".edit-to-do-form-cont__form__submit-button"
+);
