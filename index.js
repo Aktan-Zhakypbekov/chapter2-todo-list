@@ -1,14 +1,18 @@
-let projectsArray;
+let projectsArray = [];
 
-if (JSON.parse(localStorage.getItem("projects"))) {
+if (
+  JSON.parse(localStorage.getItem("projects")) != null ||
+  JSON.parse(localStorage.getItem("projects")) != undefined
+) {
   projectsArray = JSON.parse(localStorage.getItem("projects"));
 } else {
-  localStorage.setItem("projects", JSON.stringify([]));
+  localStorage.setItem("projects", JSON.stringify(projectsArray));
   projectsArray = JSON.parse(localStorage.getItem("projects"));
   alert("here");
 }
 
 displayMenuProjects();
+giveFunctionalityToMenuProjects();
 
 let addProjectFormContainer = document.querySelector(".add-project-form-cont");
 let menuAddProjectButton = document.querySelector(".menu__add-project-button");
@@ -28,37 +32,38 @@ addProjectFormSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
   addToProjectsArray();
   displayMenuProjects();
+  giveFunctionalityToMenuProjects();
   document.querySelector(".add-project-form-cont__form__project-title").value =
     "";
   addProjectFormContainer.style.cssText = "diplay: none;";
 });
 
-class CreateProject {
-  constructor(title) {
-    this.title = title;
-    this.todoList = [];
-  }
+function CreateProject(title) {
+  return {
+    title,
+    todoList: [],
+  };
 }
 
 function addToProjectsArray() {
-  let projectTitle = document.querySelector(
-    ".add-project-form-cont__form__project-title"
-  ).value;
-  let project = new CreateProject(projectTitle);
-  projectsArray.push(project);
+  let project1 = CreateProject(
+    document.querySelector(".add-project-form-cont__form__project-title").value
+  );
+  projectsArray.push(project1);
   localStorage.setItem("projects", JSON.stringify(projectsArray));
 }
 
 let optionPressed = false;
 
 function displayMenuProjects() {
-  let menuProjects = document.querySelectorAll(".project");
-  menuProjects.forEach((item) => {
-    item.remove();
-  });
+  if (document.querySelectorAll(".project")) {
+    let menuProjects = document.querySelectorAll(".project");
+    menuProjects.forEach((item) => {
+      item.remove();
+    });
+  }
 
-  let projectsList = JSON.parse(localStorage.getItem("projects"));
-  projectsList.forEach((item) => {
+  projectsArray.forEach((item) => {
     let project = document.createElement("div");
     project.className = "project";
     project.style.cssText =
@@ -77,54 +82,10 @@ function displayMenuProjects() {
     projectEdit.textContent = "Edit";
 
     let projectDelete = document.createElement("button");
-    projectDelete.className = "project-edit-button";
+    projectDelete.className = "project-delete-button";
     projectDelete.style.cssText =
       "width: 20%; background-color: black; color: rgb(47, 0, 255);";
     projectDelete.textContent = "Delete";
-
-    projectEnter.addEventListener("click", (e) => {
-      if (optionPressed) {
-        document.querySelector(".project-interface").remove();
-        optionPressed = false;
-      }
-      displayProjectInterface(item.title);
-      displayToDoInProject(item);
-      optionPressed = true;
-    });
-
-    projectEdit.addEventListener("click", (edit) => {
-      editProjectFormContainer.style.cssText = "display: flex;";
-      let butt = edit.target.parentElement.firstChild.textContent;
-      document.querySelector(
-        ".edit-project-form-cont__form__project-title"
-      ).value = butt;
-      //copyOfOld = createCopyOfOld(butt);
-
-      editProjectFormSubmitButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        projectsArray[projectsArray.findIndex((x) => x.title == butt)].title =
-          document.querySelector(
-            ".edit-project-form-cont__form__project-title"
-          ).value;
-        localStorage.setItem("projects", JSON.stringify(projectsArray));
-        projectEnter.textContent =
-          projectsArray[
-            projectsArray.findIndex(
-              (x) =>
-                x.title ==
-                document.querySelector(
-                  ".edit-project-form-cont__form__project-title"
-                ).value
-            )
-          ].title;
-      });
-    });
-
-    projectDelete.addEventListener("click", (e) => {
-      project.remove();
-      projectsArray.splice(projectsList.indexOf(item), 1);
-      localStorage.setItem("projects", JSON.stringify(projectsArray));
-    });
 
     project.appendChild(projectEnter);
     project.appendChild(projectEdit);
@@ -132,20 +93,52 @@ function displayMenuProjects() {
     document.querySelector(".menu").appendChild(project);
   });
 }
+function giveFunctionalityToMenuProjects() {
+  let projectEnterButtons = document.querySelectorAll(".project-enter-button");
+  projectEnterButtons.forEach((projectEnterButton) => {
+    projectEnterButton.addEventListener("click", (e) => {
+      if (optionPressed) {
+        document.querySelector(".project-interface").remove();
+        optionPressed = false;
+      }
+      displayProjectInterface(e.target.textContent);
+      displayToDoInProject(
+        projectsArray[
+          projectsArray.findIndex((x) => x.title == e.target.textContent)
+        ]
+      );
+      optionPressed = true;
+    });
+  });
 
-let editProjectFormContainer = document.querySelector(
-  ".edit-project-form-cont"
-);
-let editProjectFormExitButton = document.querySelector(
-  ".edit-project-form-cont__exit-cont__exit-button"
-);
-editProjectFormExitButton.addEventListener("click", (e) => {
-  editProjectFormContainer.style.cssText = "display: none;";
-});
-let editProjectFormSubmitButton = document.querySelector(
-  ".edit-project-form-cont__form__submit-button"
-);
+  let projectEditButtons = document.querySelectorAll(".project-edit-button");
+  projectEditButtons.forEach((projectEditButton) => {
+    projectEditButton.addEventListener("click", (e) => {
+      editProjectFormContainer.style.cssText = "display: flex;";
+      document.querySelector(
+        ".edit-project-form-cont__form__project-title"
+      ).value = e.target.parentElement.firstChild.textContent;
+      test = e.target.parentElement.firstChild.textContent;
+      test1 = e.target.parentElement.firstChild;
+    });
+  });
 
+  let projectDeleteButtons = document.querySelectorAll(
+    ".project-delete-button"
+  );
+  projectDeleteButtons.forEach((projectDeleteButton) => {
+    projectDeleteButton.addEventListener("click", (e) => {
+      projectsArray.splice(
+        projectsArray.findIndex(
+          (x) => x.title == e.target.parentElement.firstChild.textContent
+        ),
+        1
+      );
+      localStorage.setItem("projects", JSON.stringify(projectsArray));
+      e.target.parentElement.remove();
+    });
+  });
+}
 function displayProjectInterface(title) {
   let projectInterface = document.createElement("div");
   projectInterface.className = "project-interface";
@@ -185,7 +178,43 @@ function displayProjectInterface(title) {
   projectInterface.appendChild(projectInterfaceHeader);
   document.querySelector(".display").appendChild(projectInterface);
 }
+let test;
+let test1;
+let editProjectFormContainer = document.querySelector(
+  ".edit-project-form-cont"
+);
+let editProjectFormExitButton = document.querySelector(
+  ".edit-project-form-cont__exit-cont__exit-button"
+);
+editProjectFormExitButton.addEventListener("click", (e) => {
+  editProjectFormContainer.style.cssText = "display: none;";
+});
+let editProjectFormSubmitButton = document.querySelector(
+  ".edit-project-form-cont__form__submit-button"
+);
+editProjectFormSubmitButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  giveFunctionalityToEditProjectSubmit();
+});
 
+function giveFunctionalityToEditProjectSubmit() {
+  projectsArray[projectsArray.findIndex((x) => x.title == test)].title =
+    document.querySelector(
+      ".edit-project-form-cont__form__project-title"
+    ).value;
+  localStorage.setItem("projects", JSON.stringify(projectsArray));
+  test1.textContent =
+    projectsArray[
+      projectsArray.findIndex(
+        (x) =>
+          x.title ==
+          document.querySelector(".edit-project-form-cont__form__project-title")
+            .value
+      )
+    ].title;
+}
+///////////////-----------------------------------------------//////////////////////////////////////---------------------------------
+///////////////HERE----------------------------HERE---------------------------------HERE------------------------HERE
 let addToDoFormContainer = document.querySelector(".add-to-do-form-cont");
 let addToDoFormExitButton = document.querySelector(
   ".add-to-do-form-cont__exit-cont__exit-button"
@@ -278,29 +307,42 @@ function displayToDoInProject(item1) {
     toDoItemDelete.textContent = "Delete";
 
     toDoItemEdit.addEventListener("click", (e) => {
+      let buttTitle = e.target.parentElement.firstChild.textContent;
+      let buttDate = e.target.parentElement.childNodes[1].textContent;
+      let projectInterfaceHeaderTitle1 = document.querySelector(
+        ".project-interface-header-title"
+      );
       editToDoFormContainer.style.cssText = "display: flex;";
       document.querySelector(".edit-to-do-form-cont__form__to-do-title").value =
-        toDo.title;
+        buttTitle;
       document.querySelector(".edit-to-do-form-cont__form__to-do-date").value =
-        toDo.date;
+        buttDate;
 
       editToDoFormSubmitButton.addEventListener("click", (e) => {
         e.preventDefault();
         projectsArray[
-          projectsArray.findIndex((x) => x.title == item1.title)
+          projectsArray.findIndex(
+            (x) => x.title == projectInterfaceHeaderTitle1.textContent
+          )
         ].todoList[
           projectsArray[
-            projectsArray.findIndex((x) => x.title == item1.title)
-          ].todoList.findIndex((x) => x.title == toDo.title)
+            projectsArray.findIndex(
+              (x) => x.title == projectInterfaceHeaderTitle1.textContent
+            )
+          ].todoList.findIndex((x) => x.title == buttTitle)
         ].title = document.querySelector(
           ".edit-to-do-form-cont__form__to-do-title"
         ).value;
         projectsArray[
-          projectsArray.findIndex((x) => x.title == item1.title)
+          projectsArray.findIndex(
+            (x) => x.title == projectInterfaceHeaderTitle1.textContent
+          )
         ].todoList[
           projectsArray[
-            projectsArray.findIndex((x) => x.title == item1.title)
-          ].todoList.findIndex((x) => x.date == toDo.date)
+            projectsArray.findIndex(
+              (x) => x.title == projectInterfaceHeaderTitle1.textContent
+            )
+          ].todoList.findIndex((x) => x.date == buttDate)
         ].date = document.querySelector(
           ".edit-to-do-form-cont__form__to-do-date"
         ).value;
