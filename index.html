@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>to-do-list</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="main-cont">
@@ -21,6 +27,8 @@
         <form class="add-project-form-cont__form">
           <input
             type="text"
+            minlength="1"
+            maxlength="14"
             class="add-project-form-cont__form__project-title"
             placeholder="project title"
             required
@@ -42,6 +50,8 @@
         <form class="edit-project-form-cont__form">
           <input
             type="text"
+            minlength="1"
+            maxlength="14"
             class="edit-project-form-cont__form__project-title"
             placeholder="project title"
             required
@@ -59,6 +69,8 @@
         <form class="add-to-do-form-cont__form" action="">
           <input
             type="text"
+            minlength="1"
+            maxlength="62"
             class="add-to-do-form-cont__form__to-do-title"
             placeholder="title"
             required
@@ -87,6 +99,8 @@
         <form class="edit-to-do-form-cont__form">
           <input
             type="text"
+            minlength="1"
+            maxlength="62"
             class="edit-to-do-form-cont__form__to-do-title"
             placeholder="title"
             required
@@ -103,7 +117,9 @@
         </form>
       </div>
 
-      <header class="header">Header</header>
+      <header class="header">
+        <div class="header__title">Cyber to-do list</div>
+      </header>
       <main class="main">
         <div class="menu">
           <button class="menu__add-project-button">+ Add project</button>
@@ -111,8 +127,7 @@
         <div class="display"></div>
       </main>
       <footer class="footer">
-        footer
-        <button class="test-button">test</button>
+        <div class="footer__text">Made by AZ</div>
       </footer>
     </div>
     <script src="index.js"></script>

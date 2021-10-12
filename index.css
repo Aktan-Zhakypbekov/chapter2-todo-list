@@ -2,6 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Orbitron", sans-serif;
+}
+button {
+  font-size: 0.9rem;
 }
 .add-project-form-cont {
   background-color: black;
@@ -24,7 +28,7 @@
   align-items: center;
 }
 .add-project-form-cont__exit-cont__title {
-  margin-left: 32%;
+  margin-left: 26%;
   color: rgb(47, 0, 255);
   font-size: 1.3rem;
 }
@@ -73,13 +77,13 @@
 }
 .edit-project-form-cont__exit-cont {
   background-color: black;
-  border-bottom: 1px solid green;
+  border-bottom: 1px solid rgb(47, 0, 255);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .edit-project-form-cont__exit-cont__title {
-  margin-left: 32%;
+  margin-left: 26%;
   color: rgb(47, 0, 255);
   font-size: 1.3rem;
 }
@@ -134,7 +138,7 @@
   align-items: center;
 }
 .add-to-do-form-cont__exit-cont__title {
-  margin-left: 38%;
+  margin-left: 34%;
   color: rgb(47, 0, 255);
   font-size: 1.3rem;
 }
@@ -173,7 +177,7 @@
   border: 1px solid rgb(47, 0, 255);
 }
 .add-to-do-form-cont__form__submit-button {
-  width: 100px;
+  width: 115px;
   height: 30px;
   background-color: black;
   color: rgb(47, 0, 255);
@@ -200,7 +204,7 @@
   align-items: center;
 }
 .edit-to-do-form-cont__exit-cont__title {
-  margin-left: 38%;
+  margin-left: 34%;
   color: rgb(47, 0, 255);
   font-size: 1.3rem;
 }
@@ -248,6 +252,13 @@
   height: 100px;
   background-color: black;
   border: 1px solid rgb(47, 0, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header__title {
+  font-size: 2rem;
+  color: rgb(47, 0, 255);
 }
 .main {
   min-height: 580px;
@@ -264,8 +275,8 @@
 }
 .menu {
   background-color: black;
-  border: 1px solid rgb(47, 0, 255);
-  width: 270px;
+  border-right: 2px solid rgb(47, 0, 255);
+  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -280,8 +291,8 @@
 
 .display {
   background-color: black;
-  border: 1px solid rgb(47, 0, 255);
   flex-grow: 1;
+  background-image: url("https://wallpapercave.com/wp/wp1922286.png");
 }
 @media (max-width: 700px) {
   .main {
