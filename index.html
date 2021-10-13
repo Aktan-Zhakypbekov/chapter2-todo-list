@@ -15,106 +15,116 @@
   </head>
   <body>
     <div class="main-cont">
-      <div class="add-project-form-cont">
-        <div class="add-project-form-cont__exit-cont">
-          <div class="add-project-form-cont__exit-cont__title">
-            Project form
+      <div class="add-project-form-cont-background">
+        <div class="add-project-form-cont">
+          <div class="add-project-form-cont__exit-cont">
+            <div class="add-project-form-cont__exit-cont__title">
+              Project form
+            </div>
+            <button class="add-project-form-cont__exit-cont__exit-button">
+              X
+            </button>
           </div>
-          <button class="add-project-form-cont__exit-cont__exit-button">
-            X
-          </button>
+          <form class="add-project-form-cont__form">
+            <input
+              type="text"
+              minlength="1"
+              maxlength="14"
+              class="add-project-form-cont__form__project-title"
+              placeholder="project title"
+              required
+            />
+            <button class="add-project-form-cont__form__submit-button">
+              Submit the project
+            </button>
+          </form>
         </div>
-        <form class="add-project-form-cont__form">
-          <input
-            type="text"
-            minlength="1"
-            maxlength="14"
-            class="add-project-form-cont__form__project-title"
-            placeholder="project title"
-            required
-          />
-          <button class="add-project-form-cont__form__submit-button">
-            Submit the project
-          </button>
-        </form>
       </div>
-      <div class="edit-project-form-cont">
-        <div class="edit-project-form-cont__exit-cont">
-          <div class="edit-project-form-cont__exit-cont__title">
-            Project form
+      <div class="edit-project-form-cont-background">
+        <div class="edit-project-form-cont">
+          <div class="edit-project-form-cont__exit-cont">
+            <div class="edit-project-form-cont__exit-cont__title">
+              Project form
+            </div>
+            <button class="edit-project-form-cont__exit-cont__exit-button">
+              X
+            </button>
           </div>
-          <button class="edit-project-form-cont__exit-cont__exit-button">
-            X
-          </button>
+          <form class="edit-project-form-cont__form">
+            <input
+              type="text"
+              minlength="1"
+              maxlength="14"
+              class="edit-project-form-cont__form__project-title"
+              placeholder="project title"
+              required
+            />
+            <button class="edit-project-form-cont__form__submit-button">
+              Submit the edits
+            </button>
+          </form>
         </div>
-        <form class="edit-project-form-cont__form">
-          <input
-            type="text"
-            minlength="1"
-            maxlength="14"
-            class="edit-project-form-cont__form__project-title"
-            placeholder="project title"
-            required
-          />
-          <button class="edit-project-form-cont__form__submit-button">
-            Submit the edits
-          </button>
-        </form>
       </div>
-      <div class="add-to-do-form-cont">
-        <div class="add-to-do-form-cont__exit-cont">
-          <div class="add-to-do-form-cont__exit-cont__title">To-do form</div>
-          <button class="add-to-do-form-cont__exit-cont__exit-button">X</button>
+      <div class="add-to-do-form-cont-background">
+        <div class="add-to-do-form-cont">
+          <div class="add-to-do-form-cont__exit-cont">
+            <div class="add-to-do-form-cont__exit-cont__title">To-do form</div>
+            <button class="add-to-do-form-cont__exit-cont__exit-button">
+              X
+            </button>
+          </div>
+          <form class="add-to-do-form-cont__form" action="">
+            <input
+              type="text"
+              minlength="1"
+              maxlength="62"
+              class="add-to-do-form-cont__form__to-do-title"
+              placeholder="title"
+              required
+            />
+            <input
+              type="date"
+              class="add-to-do-form-cont__form__to-do-date"
+              placeholder="Date"
+              required
+            />
+            <button
+              class="add-to-do-form-cont__form__submit-button"
+              type="submit"
+            >
+              Submit to-do
+            </button>
+          </form>
         </div>
-        <form class="add-to-do-form-cont__form" action="">
-          <input
-            type="text"
-            minlength="1"
-            maxlength="62"
-            class="add-to-do-form-cont__form__to-do-title"
-            placeholder="title"
-            required
-          />
-          <input
-            type="date"
-            class="add-to-do-form-cont__form__to-do-date"
-            placeholder="Date"
-            required
-          />
-          <button
-            class="add-to-do-form-cont__form__submit-button"
-            type="submit"
-          >
-            Submit to-do
-          </button>
-        </form>
       </div>
-      <div class="edit-to-do-form-cont">
-        <div class="edit-to-do-form-cont__exit-cont">
-          <div class="edit-to-do-form-cont__exit-cont__title">To-do form</div>
-          <button class="edit-to-do-form-cont__exit-cont__exit-button">
-            X
-          </button>
+      <div class="edit-to-do-form-cont-background">
+        <div class="edit-to-do-form-cont">
+          <div class="edit-to-do-form-cont__exit-cont">
+            <div class="edit-to-do-form-cont__exit-cont__title">To-do form</div>
+            <button class="edit-to-do-form-cont__exit-cont__exit-button">
+              X
+            </button>
+          </div>
+          <form class="edit-to-do-form-cont__form">
+            <input
+              type="text"
+              minlength="1"
+              maxlength="62"
+              class="edit-to-do-form-cont__form__to-do-title"
+              placeholder="title"
+              required
+            />
+            <input
+              type="date"
+              class="edit-to-do-form-cont__form__to-do-date"
+              placeholder="Date"
+              required
+            />
+            <button class="edit-to-do-form-cont__form__submit-button">
+              Submit to-do edits
+            </button>
+          </form>
         </div>
-        <form class="edit-to-do-form-cont__form">
-          <input
-            type="text"
-            minlength="1"
-            maxlength="62"
-            class="edit-to-do-form-cont__form__to-do-title"
-            placeholder="title"
-            required
-          />
-          <input
-            type="date"
-            class="edit-to-do-form-cont__form__to-do-date"
-            placeholder="Date"
-            required
-          />
-          <button class="edit-to-do-form-cont__form__submit-button">
-            Submit to-do edits
-          </button>
-        </form>
       </div>
 
       <header class="header">

@@ -1,3 +1,4 @@
+// Get projectsArray from localStorage if it doesnt exist create a new one
 let projectsArray = [];
 
 if (
@@ -11,14 +12,16 @@ if (
   alert("here");
 }
 
+//Display menu projects and give them and their to-dos functionality
 displayMenuProjects();
 giveFunctionalityToMenuProjects();
 giveFunctionalityToToDoItems();
 
+//Select add project forms and edit project forms for projects, create functionality for them and give them functionality
 let test;
 let test1;
 let editProjectFormContainer = document.querySelector(
-  ".edit-project-form-cont"
+  ".edit-project-form-cont-background"
 );
 let editProjectFormExitButton = document.querySelector(
   ".edit-project-form-cont__exit-cont__exit-button"
@@ -30,7 +33,9 @@ let editProjectFormSubmitButton = document.querySelector(
   ".edit-project-form-cont__form__submit-button"
 );
 
-let addProjectFormContainer = document.querySelector(".add-project-form-cont");
+let addProjectFormContainer = document.querySelector(
+  ".add-project-form-cont-background"
+);
 let menuAddProjectButton = document.querySelector(".menu__add-project-button");
 menuAddProjectButton.addEventListener("click", (e) => {
   addProjectFormContainer.style.cssText = "display: flex;";
@@ -48,7 +53,7 @@ let addProjectFormSubmitButton = document.querySelector(
 );
 addProjectFormSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
-  addToProjectsArray();
+  addProjectToProjectsArray();
   displayMenuProjects();
   giveFunctionalityToMenuProjects();
   document.querySelector(".add-project-form-cont__form__project-title").value =
@@ -63,7 +68,7 @@ function CreateProject(title) {
   };
 }
 
-function addToProjectsArray() {
+function addProjectToProjectsArray() {
   let project1 = CreateProject(
     document.querySelector(".add-project-form-cont__form__project-title").value
   );
@@ -120,7 +125,7 @@ function giveFunctionalityToMenuProjects() {
         optionPressed = false;
       }
       displayProjectInterface(e.target.textContent);
-      displayToDoInProject(
+      displayToDosInProjectInterface(
         projectsArray[
           projectsArray.findIndex((x) => x.title == e.target.textContent)
         ]
@@ -155,7 +160,9 @@ function giveFunctionalityToMenuProjects() {
       );
       localStorage.setItem("projects", JSON.stringify(projectsArray));
       e.target.parentElement.remove();
-      document.querySelector(".project-interface").remove();
+      if (document.querySelector(".project-interface")) {
+        document.querySelector(".project-interface").remove();
+      }
     });
   });
 }
@@ -201,11 +208,11 @@ function displayProjectInterface(title) {
 
 editProjectFormSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
-  giveFunctionalityToEditProjectSubmit();
+  giveFunctionalityToEditProjectFormSubmitButton();
   editProjectFormContainer.style.cssText = "display: none;";
 });
 
-function giveFunctionalityToEditProjectSubmit() {
+function giveFunctionalityToEditProjectFormSubmitButton() {
   projectsArray[projectsArray.findIndex((x) => x.title == test)].title =
     document.querySelector(
       ".edit-project-form-cont__form__project-title"
@@ -221,14 +228,18 @@ function giveFunctionalityToEditProjectSubmit() {
       )
     ].title;
 }
-///////////////-----------------------------------------------//////////////////////////////////////---------------------------------
-///////////////HERE----------------------------HERE---------------------------------HERE------------------------HERE
+///////////////-----------------------------------------------//////////////////////////////////////-------------------------
+///////////////-----------------------------------------------//////////////////////////////////////-------------------------
+
+// Select add to-do forms and edit to-do forms create functionality for them and give them functionality
 
 let test2;
 let test21;
 let test3;
 let test31;
-let editToDoFormContainer = document.querySelector(".edit-to-do-form-cont");
+let editToDoFormContainer = document.querySelector(
+  ".edit-to-do-form-cont-background"
+);
 let editToDoFormExitButton = document.querySelector(
   ".edit-to-do-form-cont__exit-cont__exit-button"
 );
@@ -239,7 +250,9 @@ let editToDoFormSubmitButton = document.querySelector(
   ".edit-to-do-form-cont__form__submit-button"
 );
 
-let addToDoFormContainer = document.querySelector(".add-to-do-form-cont");
+let addToDoFormContainer = document.querySelector(
+  ".add-to-do-form-cont-background"
+);
 let addToDoFormExitButton = document.querySelector(
   ".add-to-do-form-cont__exit-cont__exit-button"
 );
@@ -253,8 +266,8 @@ let addToDoFormSubmitButton = document.querySelector(
 );
 addToDoFormSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
-  addToDoToProjectsArrayMenuProjects();
-  displayToDoInProject();
+  addToDoToProjectsInProjectsArray();
+  displayToDosInProjectInterface();
   giveFunctionalityToToDoItems();
   document.querySelector(".add-to-do-form-cont__form__to-do-title").value = "";
   document.querySelector(".add-to-do-form-cont__form__to-do-date").value = "";
@@ -268,7 +281,7 @@ function CreateToDo(title, date) {
   };
 }
 
-function addToDoToProjectsArrayMenuProjects() {
+function addToDoToProjectsInProjectsArray() {
   let toDoTitle = document.querySelector(
     ".add-to-do-form-cont__form__to-do-title"
   ).value;
@@ -285,7 +298,7 @@ function addToDoToProjectsArrayMenuProjects() {
   localStorage.setItem("projects", JSON.stringify(projectsArray));
 }
 
-function displayToDoInProject() {
+function displayToDosInProjectInterface() {
   if (document.querySelectorAll(".to-do-item")) {
     let toDoItems = document.querySelectorAll(".to-do-item");
     toDoItems.forEach((item) => {
@@ -392,11 +405,11 @@ function giveFunctionalityToToDoItems() {
 
 editToDoFormSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
-  giveFunctionalityToToDoFormSubmit();
+  giveFunctionalityToEditToDoFormSubmitButton();
   editToDoFormContainer.style.cssText = "display: none;";
 });
 
-function giveFunctionalityToToDoFormSubmit() {
+function giveFunctionalityToEditToDoFormSubmitButton() {
   projectsArray[
     projectsArray.findIndex(
       (x) =>
@@ -414,8 +427,6 @@ function giveFunctionalityToToDoFormSubmit() {
   ].title = document.querySelector(
     ".edit-to-do-form-cont__form__to-do-title"
   ).value;
-
-  ////////////////////////////////////////////////////////////////////////////////////
 
   projectsArray[
     projectsArray.findIndex(
