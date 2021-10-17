@@ -304,15 +304,6 @@ button {
   background-repeat: no-repeat;
   background-size: contain;
 }
-@media (max-width: 700px) {
-  .main {
-    flex-direction: column;
-  }
-  .menu {
-    height: 70px;
-    width: 100%;
-  }
-}
 
 .footer {
   height: 80px;

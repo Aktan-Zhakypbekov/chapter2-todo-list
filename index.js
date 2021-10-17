@@ -9,7 +9,6 @@ if (
 } else {
   localStorage.setItem("projects", JSON.stringify(projectsArray));
   projectsArray = JSON.parse(localStorage.getItem("projects"));
-  alert("here");
 }
 
 //Display menu projects and give them and their to-dos functionality
